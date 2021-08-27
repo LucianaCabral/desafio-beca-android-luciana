@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Desafio Beca Luciana</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email_label">Email</string>
+    <string name="put_email_label">Put email</string>
+    <string name="password">Password</string>
+    <string name="action_sign_in">Login</string>
+    <string name="welcome">Welcome</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="button_sign_in">button_sign_in</string>
+
 </resources>
