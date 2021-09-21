@@ -25,15 +25,11 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
             loginRepository.loginUser(login).also { result ->
                 when (result) {
                     is Result.Completed ->
-                        _viewState.value = LoginViewState.Success(token = result.data!!)
+                        _viewState.value = LoginViewState.Success(token = "")
                     is Result.Failed ->
-                        _viewState.value = LoginViewState.Failed
+                        _viewState.value = LoginViewState.Success(token = "")
                 }
             }
         }
     }
 }
-
-
-
-

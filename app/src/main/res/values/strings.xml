@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Desafio Beca Luciana</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email_label">Email</string>
     <string name="put_email_label">Put email</string>
     <string name="password">Password</string>
@@ -9,5 +7,17 @@
     <string name="welcome">Welcome</string>
     <string name="login_failed">"Login failed"</string>
     <string name="button_sign_in">button_sign_in</string>
-
+    <string name="cancel">Cancel</string>
+    <string name="login_sucess">Login com sucesso</string>
+    <string name="Do_you_want_save_your_password">Have you save the password?</string>
+    <string name="tv_title">Biometric</string>
+    <string name="label_touch_in_digital_sensor_biometric_to_confirm_biometric">Touch the fingerprint sensor to confirm biometric</string>
+    <string name="fingerprint_image">fingerrintImage</string>
+    <string name="label_biometric">Biometric</string>
+    <string name="ok">Ok</string>
+    <string name="signInPassword">Use password</string>
+    <string name="useBiometric_advice">Use biometric</string>
+    <string name="touch_digital_sensor">Touch in digital sensor</string>
+    <string name="use_biometrics">Use Biometrics</string>
+    <string name="failed_authentic">Failed Authentic</string>
 </resources>
