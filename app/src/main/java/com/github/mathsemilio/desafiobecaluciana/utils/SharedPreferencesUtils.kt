@@ -26,9 +26,27 @@ class SharedPreferencesUtils(context: Context) {
             }
         }
 
+    var rememberMeState: Boolean
+        get() = sharedPreferences.getBoolean(REMEMBER_ME_STATE, false)
+        set(value) {
+            editor.apply {
+                editor.putBoolean(REMEMBER_ME_STATE, value)
+                apply()
+            }
+        }
+
+    fun clearLoginData() {
+        editor.apply {
+            editor.putString(USER_KEY, "")
+            editor.putString(PASSWORD_KEY, "")
+            apply()
+        }
+    }
+
     companion object {
         private const val KEY_NAME = "com.github.mathsemilio.desafiobecaluciana"
         private const val USER_KEY = "user"
         private const val PASSWORD_KEY = "password"
+        private const val REMEMBER_ME_STATE = "remember_me_state"
     }
 }

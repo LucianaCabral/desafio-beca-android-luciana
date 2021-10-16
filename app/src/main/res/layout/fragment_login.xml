@@ -15,11 +15,13 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_16"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="@dimen/dimen_32"
         android:gravity="center"
         android:text="@string/welcome"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +34,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="24dp"
-        android:hint="@string/email_label"
+        android:hint="@string/user_label"
         android:imeActionLabel="Sign your email"
         android:inputType="textWebEmailAddress"
         android:selectAllOnFocus="true"
@@ -40,7 +42,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:startIconDrawable="@drawable/ic_email">
+        app:startIconDrawable="@drawable/ic_person">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
@@ -70,7 +72,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberPassword" />
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -93,18 +95,27 @@
         android:textColor="@color/white"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/loginButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
         app:layout_constraintVertical_bias="0.0" />
+
+    <CheckBox
+        android:id="@+id/rememberMeCheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_8"
+        android:text="@string/remember_me_login"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@id/loginButton"
+        app:layout_constraintTop_toBottomOf="@id/loginButton" />
 
     <Button
         android:id="@+id/useBiometricsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dimen_32"
-        android:layout_marginTop="@dimen/dimen_16"
-        android:layout_marginRight="@dimen/dimen_32"
+        android:layout_marginTop="@dimen/dimen_8"
         android:backgroundTint="@color/trasnparente"
         android:clickable="true"
         android:enabled="true"
@@ -113,7 +124,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#0000EE"
         android:textSize="@dimen/font_size_12"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/loginButton"
         app:layout_constraintTop_toBottomOf="@id/loginButton" />
 
     <ProgressBar

@@ -2,8 +2,6 @@ package com.github.mathsemilio.desafiobecaluciana.ui
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import android.widget.Toast.LENGTH_LONG
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.github.mathsemilio.desafiobecaluciana.NavigationHost
@@ -13,11 +11,13 @@ import com.github.mathsemilio.desafiobecaluciana.data.LoginDataSource
 import com.github.mathsemilio.desafiobecaluciana.databinding.FragmentLoginBinding
 import com.github.mathsemilio.desafiobecaluciana.extensions.getString
 import com.github.mathsemilio.desafiobecaluciana.service.RetrofitService
+import com.github.mathsemilio.desafiobecaluciana.showToast
 import com.github.mathsemilio.desafiobecaluciana.utils.SharedPreferencesUtils
 import com.github.mathsemilio.desafiobecaluciana.viewModel.LoginRepositoryImpl
 import com.github.mathsemilio.desafiobecaluciana.viewModel.LoginViewModel
 import com.github.mathsemilio.desafiobecaluciana.viewModel.LoginViewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
@@ -34,9 +34,33 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         sharedPreferencesUtils = SharedPreferencesUtils(requireContext())
         setupViewModel()
         setupObservers()
-        attachLoginButtonOnClickListener()
         attachButtonUseBiometricListener()
+        attachLoginButtonOnClickListener()
+        setupRememberMeCheckBox()
+    }
 
+    private fun setupRememberMeCheckBox() {
+        val isRememberMeSet = sharedPreferencesUtils.rememberMeState
+        if (isRememberMeSet) {
+            binding.rememberMeCheckbox.isChecked = true
+            binding.user.editText?.setText(sharedPreferencesUtils.user)
+            binding.password.editText?.setText(sharedPreferencesUtils.password)
+        } else {
+            binding.rememberMeCheckbox.isChecked = false
+        }
+    }
+
+    private fun onCheckboxClicked() {
+        if (binding.rememberMeCheckbox.isChecked) {
+            sharedPreferencesUtils.apply {
+                user = binding.user.getString()
+                password = binding.password.getString()
+                rememberMeState = true
+            }
+        } else {
+            sharedPreferencesUtils.rememberMeState = false
+            sharedPreferencesUtils.clearLoginData()
+        }
     }
 
     private fun setupViewModel() {
@@ -58,19 +82,17 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private fun onLoginSuccess() {
         binding.progressBar.visibility = View.GONE
-        Toast.makeText(requireContext(), getString(R.string.login_sucess), Toast.LENGTH_SHORT)
-            .show()
+        showToast(getString(R.string.message_login_sucess))
         sharedPreferencesUtils.apply {
             user = binding.user.getString()
             password = binding.password.getString()
         }
+        onCheckboxClicked()
     }
 
     private fun onLoginError() {
         binding.progressBar.visibility = View.GONE
-        Toast.makeText(requireContext(), getString(R.string.login_failed), Toast.LENGTH_SHORT)
-            .show()
-
+        showToast(getString(R.string.login_failed))
     }
 
     private fun attachLoginButtonOnClickListener() {
@@ -103,15 +125,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             .setMessage(resources.getString(R.string.label_touch_in_digital_sensor_biometric_to_confirm_biometric))
             .setIcon(R.drawable.ic_fingerprint_)
             .setNegativeButton(resources.getString(R.string.signInPassword)) { dialog, which ->
-                Toast.makeText(requireContext(), getString(R.string.cancel), Toast.LENGTH_SHORT)
-                    .show()
+                showToast(getString(R.string.dialog_button_cancel))
             }
             .setPositiveButton(resources.getString(R.string.ok)) { dialog, which ->
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.touch_digital_sensor),
-                    LENGTH_LONG
-                ).show()
+                showToast(getString(R.string.touch_digital_sensor))
             }
         materialAlertDialogBuilder.show()
     }
